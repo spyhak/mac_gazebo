@@ -108,7 +108,7 @@ link_directories(
   ${ogre_library_dirs}
 )
 
-gz_add_library(gazebo_rendering ${sources} ${Boost_LIBRARIES})
+gz_add_library(gazebo_rendering ${sources})
 
 target_link_libraries( gazebo_rendering
   gazebo_common 
@@ -117,13 +117,15 @@ target_link_libraries( gazebo_rendering
   gazebo_sdf_interface
   gazebo_skyx
   gazebo_selection_buffer
-  ${CCD_LIBRARIES}
   ${ogre_libraries} 
   ${OPENGL_LIBRARIES} 
   ${CEGUI_LIBRARIES}
-  ${Boost_LIBRARIES}
-  X11
 )
+
+if (NOT APPLE)
+  target_link_libraries(gazebo_rendering X11)
+endif()
+
 
 if (${OGRE_VERSION} GREATER 1.7.4)
   target_link_libraries( gazebo_rendering
@@ -133,12 +135,9 @@ if (${OGRE_VERSION} GREATER 1.7.4)
   gazebo_sdf_interface
   gazebo_skyx
   gazebo_selection_buffer
-  ${CCD_LIBRARIES}
   ${ogre_libraries} 
   ${OPENGL_LIBRARIES} 
   ${CEGUI_LIBRARIES}
-  ${Boost_LIBRARIES}
-  X11)
 endif()
 
 gz_install_library(gazebo_rendering)
