@@ -29,6 +29,9 @@
 #include <mach/mach.h>
 #endif
 
+#define CLOCK_REALTIME 0
+#define CLOCK_MONOTONIC 0
+
 #include "gazebo/math/Helpers.hh"
 #include "gazebo/common/Time.hh"
 #include "gazebo/common/Console.hh"
