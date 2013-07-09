@@ -137,7 +137,7 @@ if (${OGRE_VERSION} GREATER 1.7.4)
   gazebo_selection_buffer
   ${ogre_libraries} 
   ${OPENGL_LIBRARIES} 
-  ${CEGUI_LIBRARIES}
+  ${CEGUI_LIBRARIES})
 endif()
 
 gz_install_library(gazebo_rendering)
