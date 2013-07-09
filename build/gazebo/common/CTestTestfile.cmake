@@ -1,0 +1,36 @@
+# CMake generated Testfile for 
+# Source directory: /Users/spyros/Downloads/osrf-gazebo-222b5b368663/gazebo/common
+# Build directory: /Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/gazebo/common
+# 
+# This file includes the relevent testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+ADD_TEST(Animation_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/gazebo/common/Animation_TEST" "--gtest_output=xml:/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Animation_TEST.xml")
+SET_TESTS_PROPERTIES(Animation_TEST PROPERTIES  TIMEOUT "240")
+ADD_TEST(check_Animation_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/tools/check_test_ran.py" "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Animation_TEST.xml")
+ADD_TEST(ColladaLoader_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/gazebo/common/ColladaLoader_TEST" "--gtest_output=xml:/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_ColladaLoader_TEST.xml")
+SET_TESTS_PROPERTIES(ColladaLoader_TEST PROPERTIES  TIMEOUT "240")
+ADD_TEST(check_ColladaLoader_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/tools/check_test_ran.py" "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_ColladaLoader_TEST.xml")
+ADD_TEST(Color_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/gazebo/common/Color_TEST" "--gtest_output=xml:/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Color_TEST.xml")
+SET_TESTS_PROPERTIES(Color_TEST PROPERTIES  TIMEOUT "240")
+ADD_TEST(check_Color_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/tools/check_test_ran.py" "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Color_TEST.xml")
+ADD_TEST(Console_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/gazebo/common/Console_TEST" "--gtest_output=xml:/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Console_TEST.xml")
+SET_TESTS_PROPERTIES(Console_TEST PROPERTIES  TIMEOUT "240")
+ADD_TEST(check_Console_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/tools/check_test_ran.py" "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Console_TEST.xml")
+ADD_TEST(Exception_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/gazebo/common/Exception_TEST" "--gtest_output=xml:/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Exception_TEST.xml")
+SET_TESTS_PROPERTIES(Exception_TEST PROPERTIES  TIMEOUT "240")
+ADD_TEST(check_Exception_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/tools/check_test_ran.py" "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Exception_TEST.xml")
+ADD_TEST(Material_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/gazebo/common/Material_TEST" "--gtest_output=xml:/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Material_TEST.xml")
+SET_TESTS_PROPERTIES(Material_TEST PROPERTIES  TIMEOUT "240")
+ADD_TEST(check_Material_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/tools/check_test_ran.py" "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Material_TEST.xml")
+ADD_TEST(Mesh_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/gazebo/common/Mesh_TEST" "--gtest_output=xml:/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Mesh_TEST.xml")
+SET_TESTS_PROPERTIES(Mesh_TEST PROPERTIES  TIMEOUT "240")
+ADD_TEST(check_Mesh_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/tools/check_test_ran.py" "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Mesh_TEST.xml")
+ADD_TEST(Image_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/gazebo/common/Image_TEST" "--gtest_output=xml:/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Image_TEST.xml")
+SET_TESTS_PROPERTIES(Image_TEST PROPERTIES  TIMEOUT "240")
+ADD_TEST(check_Image_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/tools/check_test_ran.py" "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Image_TEST.xml")
+ADD_TEST(SystemPaths_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/gazebo/common/SystemPaths_TEST" "--gtest_output=xml:/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_SystemPaths_TEST.xml")
+SET_TESTS_PROPERTIES(SystemPaths_TEST PROPERTIES  TIMEOUT "240")
+ADD_TEST(check_SystemPaths_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/tools/check_test_ran.py" "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_SystemPaths_TEST.xml")
+ADD_TEST(Time_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/gazebo/common/Time_TEST" "--gtest_output=xml:/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Time_TEST.xml")
+SET_TESTS_PROPERTIES(Time_TEST PROPERTIES  TIMEOUT "240")
+ADD_TEST(check_Time_TEST "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/tools/check_test_ran.py" "/Users/spyros/Downloads/osrf-gazebo-222b5b368663/build/test_results/_Time_TEST.xml")
