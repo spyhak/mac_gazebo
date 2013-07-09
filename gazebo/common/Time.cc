@@ -49,12 +49,16 @@ const Time Time::Zero = common::Time(0, 0);
 /////////////////////////////////////////////////
 Time::Time()
 {
-  this->sec = 0;
-  this->nsec = 0;
-
-  // get clock resolution, skip sleep if resolution is larger then
-  // requested sleep time
-  clock_getres(CLOCK_REALTIME, &clockResolution);
+    this->sec = 0;
+    this->nsec = 0;
+    
+#ifdef __MACH__
+    clockResolution.tv_sec = 1 / sysconf(_SC_CLK_TCK);
+#else
+    // get clock resolution, skip sleep if resolution is larger then
+    // requested sleep time
+    clock_getres(CLOCK_REALTIME, &clockResolution);
+#endif
 }
 
 /////////////////////////////////////////////////
