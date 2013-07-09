@@ -3,9 +3,6 @@ include (CheckIncludeFiles)
 include (CheckFunctionExists)
 include (CheckLibraryExists)
 
-find_package(Boost COMPONENTS system REQUIRED)
-include (FindPkgConfig)
-
 include_directories(SYSTEM
   ${CMAKE_CURRENT_BINARY_DIR} 
   ${CMAKE_SOURCE_DIR}/deps/opende/include
@@ -18,7 +15,6 @@ include_directories(SYSTEM
 
 link_directories(  
   ${CCD_LIBRARY_DIRS}
-  /usr/local/lib
 )
 
 add_subdirectory(OPCODE)
@@ -244,9 +240,9 @@ if (SSE2_FOUND OR SSE3_FOUND OR SSSE3_FOUND OR SSE4_1_FOUND OR SSE4_2_FOUND)
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSSE")
 endif()
 
-set (CMAKE_SHARED_LINKER_FLAGS "${CMAKE_LINK_FLAGS_${CMAKE_BUILD_TYPE}} -MF -MT -fno-strict-aliasing -DPIC -lboost_filesystem-mt -lboost_system-mt -lboost_thread-mt")
+set (CMAKE_SHARED_LINKER_FLAGS "${CMAKE_LINK_FLAGS_${CMAKE_BUILD_TYPE}} -MF -MT -fno-strict-aliasing -DPIC ")
 
-gz_add_library(gazebo_ode ${sources} ${Boost_LIBRARIES})
+gz_add_library(gazebo_ode ${sources})
 target_link_libraries(gazebo_ode gazebo_opcode gazebo_gimpact gazebo_opende_ou ${CCD_LIBRARIES} ${Boost_LIBRARIES})
 
 add_dependencies(gazebo_ode gazebo_opcode gazebo_gimpact)
