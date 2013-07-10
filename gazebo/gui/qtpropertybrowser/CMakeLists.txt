@@ -22,7 +22,7 @@ set (qt_headers qtpropertybrowser.h
   )
 
 set (resources qtpropertybrowser.qrc)
-QT4_WRAP_CPP(headers_MOC ${qt_headers}  OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
+QT4_WRAP_CPP(headers_MOC ${qt_headers}  OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED -DBOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION)
 QT4_ADD_RESOURCES(resources_RCC ${resources})
 
 add_library(gzqtpropertybrowser STATIC ${sources} ${headers_MOC} ${resources_RCC})
