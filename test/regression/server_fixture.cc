@@ -16,6 +16,7 @@
 */
 
 #include "ServerFixture.hh"
+#include "gazebo/sensors/SensorTypes.hh"
 
 using namespace gazebo;
 class ServerFixtureTest : public ServerFixture

@@ -20,6 +20,7 @@
 #include "gazebo/sensors/sensors.hh"
 #include "gazebo/common/common.hh"
 #include "scans_cmp.h"
+#include "gazebo/sensors/SensorTypes.hh"
 
 #define TOL 1e-4
 
