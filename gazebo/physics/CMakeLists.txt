@@ -68,7 +68,7 @@ set (headers
   Model.hh
   ModelState.hh
   MultiRayShape.hh
-  Physics.hh
+  PhysicsIface.hh
   PhysicsEngine.hh
   PhysicsFactory.hh
   PhysicsTypes.hh
