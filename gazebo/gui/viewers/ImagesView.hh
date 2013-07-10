@@ -21,7 +21,9 @@
 #include <utility>
 #include <vector>
 
+#ifndef Q_MOC_RUN
 #include <boost/thread/mutex.hpp>
+#endif
 
 #include "gazebo/common/Time.hh"
 #include "gazebo/msgs/msgs.hh"
