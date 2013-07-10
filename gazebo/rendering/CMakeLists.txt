@@ -128,16 +128,7 @@ endif()
 
 
 if (${OGRE_VERSION} GREATER 1.7.4)
-  target_link_libraries( gazebo_rendering
-  gazebo_msgs
-  gazebo_common 
-  gazebo_transport
-  gazebo_sdf_interface
-  gazebo_skyx
-  gazebo_selection_buffer
-  ${ogre_libraries} 
-  ${OPENGL_LIBRARIES} 
-  ${CEGUI_LIBRARIES})
+  target_link_libraries( gazebo_rendering gazebo_rendering_deferred)
 endif()
 
 gz_install_library(gazebo_rendering)

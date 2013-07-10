@@ -44,7 +44,7 @@
 #include "gazebo/transport/Node.hh"
 #include "gazebo/transport/Subscriber.hh"
 
-#include "gazebo/common/Common.hh"
+#include "gazebo/common/CommonIface.hh"
 #include "gazebo/common/Color.hh"
 #include "gazebo/common/Events.hh"
 #include "gazebo/common/Exception.hh"
@@ -64,6 +64,7 @@
 using namespace gazebo;
 using namespace rendering;
 
+
 //////////////////////////////////////////////////
 RenderEngine::RenderEngine()
 {
@@ -75,8 +76,8 @@ RenderEngine::RenderEngine()
   this->initialized = false;
 
   this->renderPathType = NONE;
-  this->windowManager.reset(new WindowManager);
 }
+
 
 //////////////////////////////////////////////////
 RenderEngine::~RenderEngine()
@@ -93,50 +94,53 @@ void RenderEngine::Load()
     return;
   }
 
-  if (!this->root)
+  this->connections.push_back(event::Events::ConnectPreRender(
+        boost::bind(&RenderEngine::PreRender, this)));
+  this->connections.push_back(event::Events::ConnectRender(
+        boost::bind(&RenderEngine::Render, this)));
+  this->connections.push_back(event::Events::ConnectPostRender(
+        boost::bind(&RenderEngine::PostRender, this)));
+
+  // Create a new log manager and prevent output from going to stdout
+  this->logManager = new Ogre::LogManager();
+
+  std::string logPath = common::SystemPaths::Instance()->GetLogPath();
+  logPath += "/ogre.log";
+
+  this->logManager->createLog(logPath, true, false, false);
+
+  if (this->root)
   {
-    this->connections.push_back(event::Events::ConnectPreRender(
-          boost::bind(&RenderEngine::PreRender, this)));
-    this->connections.push_back(event::Events::ConnectRender(
-          boost::bind(&RenderEngine::Render, this)));
-    this->connections.push_back(event::Events::ConnectPostRender(
-          boost::bind(&RenderEngine::PostRender, this)));
-
-    // Create a new log manager and prevent output from going to stdout
-    this->logManager = new Ogre::LogManager();
-
-    std::string logPath = common::SystemPaths::Instance()->GetLogPath();
-    logPath += "/ogre.log";
-
-    this->logManager->createLog(logPath, true, false, false);
-
-    // Make the root
-    try
-    {
-      this->root = new Ogre::Root();
-    }
-    catch(Ogre::Exception &e)
-    {
-      gzthrow("Unable to create an Ogre rendering environment, no Root ");
-    }
-
-    // Load all the plugins
-    this->LoadPlugins();
-
-    // Setup the rendering system, and create the context
-    this->SetupRenderSystem();
-
-    // Initialize the root node, and don't create a window
-    this->root->initialise(false);
-
-    // Setup the available resources
-    this->SetupResources();
+    gzerr << "Attempting to load, but root already exist\n";
+    return;
   }
+
+  // Make the root
+  try
+  {
+    this->root = new Ogre::Root();
+  }
+  catch(Ogre::Exception &e)
+  {
+    gzthrow("Unable to create an Ogre rendering environment, no Root ");
+  }
+
+  // Load all the plugins
+  this->LoadPlugins();
+
+  // Setup the rendering system, and create the context
+  this->SetupRenderSystem();
+
+  // Initialize the root node, and don't create a window
+  this->root->initialise(false);
+
+  // Setup the available resources
+  this->SetupResources();
 
   std::stringstream stream;
   stream << (int32_t)this->dummyWindowId;
 
-  this->windowManager->CreateWindow(stream.str(), 1, 1);
+  WindowManager::Instance()->CreateWindow(stream.str(), 1, 1);
   this->CheckSystemCapabilities();
 }
 
@@ -193,7 +197,7 @@ ScenePtr RenderEngine::GetScene(const std::string &_name)
   std::vector<ScenePtr>::iterator iter;
 
   for (iter = this->scenes.begin(); iter != this->scenes.end(); ++iter)
-    if (_name.empty() || (*iter)->GetName() == _name)
+    if ((*iter)->GetName() == _name)
       return (*iter);
 
   return ScenePtr();
@@ -277,15 +281,12 @@ void RenderEngine::Fini()
   if (!this->initialized)
     return;
 
-  if (this->node)
-    this->node->Fini();
-  this->node.reset();
-
+  this->node->Fini();
   this->connections.clear();
 
   // TODO: this was causing a segfault on shutdown
   // Close all the windows first;
-  this->windowManager->Fini();
+  WindowManager::Instance()->Fini();
 
   RTShaderSystem::Instance()->Fini();
 
@@ -329,7 +330,7 @@ void RenderEngine::Fini()
     this->dummyDisplay = NULL;
   }
 #endif
-    
+
   this->initialized = false;
 }
 
@@ -356,13 +357,13 @@ void RenderEngine::LoadPlugins()
     std::vector<std::string>::iterator piter;
 
 #ifdef __APPLE__
-      std::string prefix = "lib";
-      std::string extension = ".dylib";
+    std::string prefix = "lib";
+    std::string extension = ".dylib";
 #else
-      std::string prefix = "";
-      std::string extension = ".so";
+    std::string prefix = "";
+    std::string extension = ".so";
 #endif
-      
+
     plugins.push_back(path+"/"+prefix+"RenderSystem_GL");
     plugins.push_back(path+"/"+prefix+"Plugin_ParticleFX");
     plugins.push_back(path+"/"+prefix+"Plugin_BSPSceneManager");
@@ -471,9 +472,9 @@ void RenderEngine::AddResourcePath(const std::string &_uri)
       }
     }
   }
-  catch(Ogre::Exception &/*_e*/)
+  catch(Ogre::Exception)
   {
-    gzthrow("Unable to load Ogre Resources.\nMake sure the"
+    gzthrow(std::string("Unable to load Ogre Resources.\nMake sure the") +
         "resources path in the world file is set correctly.");
   }
 }
@@ -551,10 +552,10 @@ void RenderEngine::SetupResources()
         Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
             aiter->first, "FileSystem", aiter->second);
       }
-      catch(Ogre::Exception &/*_e*/)
+      catch(Ogre::Exception)
       {
-        gzthrow("Unable to load Ogre Resources. Make sure the resources path "
-            "in the world file is set correctly.");
+        gzthrow(std::string("Unable to load Ogre Resources.\n") +
+            "Make sure the resources path in the world file is set correctly.");
       }
     }
   }
@@ -614,9 +615,9 @@ void RenderEngine::SetupRenderSystem()
 bool RenderEngine::CreateContext()
 {
   bool result = true;
-    
+
 #ifdef Q_OS_MAC
-    this->dummyDisplay = 0;
+  this->dummyDisplay = 0;
 #else
   try
   {
@@ -721,10 +722,4 @@ void RenderEngine::CheckSystemCapabilities()
   // Disable deferred rendering for now. Needs more work.
   // if (hasRenderToVertexBuffer && multiRenderTargetCount >= 8)
   //  this->renderPathType = RenderEngine::DEFERRED;
-}
-
-/////////////////////////////////////////////////
-WindowManagerPtr RenderEngine::GetWindowManager() const
-{
-  return this->windowManager;
 }
