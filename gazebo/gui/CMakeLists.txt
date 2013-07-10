@@ -10,7 +10,6 @@ include_directories(
 )
 
 add_definitions(${QT_DEFINITIONS})
-add_definitions(-DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
 
 add_subdirectory(qtpropertybrowser)
 add_subdirectory(building)
@@ -98,7 +97,6 @@ gz_build_qt_tests(${qt_tests})
 
 set (resources resources.qrc)
 
-QT4_WRAP_CPP(sources ${moc-sources} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
 QT4_WRAP_CPP(headers_MOC ${qt_headers} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
 QT4_ADD_RESOURCES(resources_RCC ${resources})
 

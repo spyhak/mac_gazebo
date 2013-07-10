@@ -15,7 +15,7 @@ set (headers
 )
 
 set (resources ../resources.qrc)
-QT4_WRAP_CPP(headers_MOC ${qt_headers})
+QT4_WRAP_CPP(headers_MOC ${qt_headers} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
 QT4_ADD_RESOURCES(resources_RCC ${resources})
 
 add_library(gazebo_gui_terrain STATIC ${sources} ${headers_MOC}
