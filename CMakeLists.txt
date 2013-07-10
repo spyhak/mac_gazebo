@@ -265,7 +265,6 @@ if (UNIX)
   gz_setup_unix()
 else (WIN32)
   gz_setup_windows()
-else (APPLE)
 endif()
 
 if(APPLE)

@@ -5,7 +5,6 @@ include_directories(SYSTEM
   ${CEGUI_INCLUDE_DIRS}
   skyx
   skyx/include
-  /opt/X11/include
 )
 
 if (${OGRE_VERSION} GREATER 1.7.4)
@@ -107,7 +106,6 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/rendering.hh.in
 
 link_directories(  
   ${ogre_library_dirs}
-  /opt/X11/lib
 )
 
 gz_add_library(gazebo_rendering ${sources})
