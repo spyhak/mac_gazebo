@@ -14,6 +14,17 @@
  * limitations under the License.
  *
 */
+
+// The following is needed to enable the GetMemInfo function for OSX
+#ifdef __MACH__
+# include <mach/mach.h>
+# include <MacTypes.h>
+#endif  // __MACH__
+
+#ifdef nil
+#undef nil
+#endif
+
 #include <string.h>
 
 #include "gazebo/rendering/Rendering.hh"

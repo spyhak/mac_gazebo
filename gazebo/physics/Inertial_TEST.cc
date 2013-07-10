@@ -17,11 +17,13 @@
 
 #include "gazebo/sensors/Sensor.hh"
 #include "gazebo/sensors/SensorsIface.hh"
+#include "gazebo/sensors/SensorTypes.hh"
 #include <gtest/gtest.h>
 #include "gazebo/physics/PhysicsIface.hh"
+#include "gazebo/physics/PhysicsTypes.hh"
+#include "gazebo/physics/PhysicsEngine.hh"
 #include "test/ServerFixture.hh"
 #include "gazebo/physics/Inertial.hh"
-#include "gazebo/sensors/SensorTypes.hh"
 #include "gazebo/sensors/CameraSensor.hh"
 #include "gazebo/rendering/RenderTypes.hh"
 #include "gazebo/rendering/RenderingIface.hh"
