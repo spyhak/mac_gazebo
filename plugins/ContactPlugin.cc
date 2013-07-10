@@ -17,6 +17,8 @@
  * Author: Nate Koenig mod by John Hsu
  */
 #include "ContactPlugin.hh"
+#include "gazebo/common/CommonTypes.hh"
+#include "gazebo/sensors/SensorTypes.hh"
 
 using namespace gazebo;
 GZ_REGISTER_SENSOR_PLUGIN(ContactPlugin)
