@@ -10,6 +10,7 @@ include_directories(
 )
 
 add_definitions(${QT_DEFINITIONS})
+add_definitions(-DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
 
 add_subdirectory(qtpropertybrowser)
 add_subdirectory(building)

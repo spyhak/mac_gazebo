@@ -1,7 +1,6 @@
 include (${gazebo_cmake_dir}/GazeboUtils.cmake)
 include ( ${QT_USE_FILE} )
 
-
 set (sources
   ImageView.cc
   ImagesView.cc
@@ -30,6 +29,8 @@ set (qt_tests
 # Generate executables for each of the QT unit tests
 gz_build_qt_tests(${qt_tests})
 
+
+add_definitions(-DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
 set (resources ../resources.qrc)
 QT4_WRAP_CPP(sources ${moc-sources} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
 QT4_WRAP_CPP(headers_MOC ${qt_headers})
