@@ -5,6 +5,7 @@ include_directories(SYSTEM
   ${CEGUI_INCLUDE_DIRS}
   skyx
   skyx/include
+  /opt/X11/include
 )
 
 if (${OGRE_VERSION} GREATER 1.7.4)
@@ -77,7 +78,7 @@ set (headers
   Projector.hh
   RenderEngine.hh
   RenderEvents.hh
-  Rendering.hh
+  RenderingIface.hh
   RenderTypes.hh
   Road2d.hh
   RFIDVisual.hh
@@ -106,6 +107,7 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/rendering.hh.in
 
 link_directories(  
   ${ogre_library_dirs}
+  /opt/X11/lib
 )
 
 gz_add_library(gazebo_rendering ${sources})
@@ -144,6 +146,6 @@ gz_install_library(gazebo_rendering)
 gz_install_includes("rendering" ${headers} ${CMAKE_CURRENT_BINARY_DIR}/rendering.hh)
 
 # unit tests
-set (gtest_sources
-  GpuLaser_TEST.cc)
-gz_build_dri_tests(${gtest_sources})
+#set (gtest_sources
+#  GpuLaser_TEST.cc)
+#gz_build_dri_tests(${gtest_sources})

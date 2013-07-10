@@ -40,6 +40,9 @@
 #include "gazebo/gui/GuiEvents.hh"
 #include "gazebo/gui/GLWidget.hh"
 
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+
 using namespace gazebo;
 using namespace gui;
 
@@ -760,9 +763,10 @@ std::string GLWidget::GetOgreHandle() const
 {
   std::string ogreHandle;
 
-#ifdef WIN32
+#ifdef WIN32 || defined(__APPLE__)
   ogreHandle = boost::lexical_cast<std::string>(this->winId());
 #else
+    /*
   QX11Info info = x11Info();
   QWidget *q_parent = dynamic_cast<QWidget*>(this->renderFrame);
   ogreHandle = boost::lexical_cast<std::string>(
@@ -774,6 +778,7 @@ std::string GLWidget::GetOgreHandle() const
   assert(q_parent);
   ogreHandle += boost::lexical_cast<std::string>(
       static_cast<uint64_t>(q_parent->winId()));
+     */
 #endif
 
   return ogreHandle;

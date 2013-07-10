@@ -20,6 +20,13 @@
 #include "gazebo/rendering/Scene.hh"
 #include "gazebo/rendering/GpuLaser.hh"
 #include "test/ServerFixture.hh"
+#include "gazebo/sensors/sensors.hh"
+#include "gazebo/sensors/SensorTypes.hh"
+#include "gazebo/common/CommonTypes.hh"
+#include "gazebo/sensors/CameraSensor.hh"
+#include "gazebo/sensors/SensorFactory.hh"
+
+
 
 class GpuLaser_TEST : public ServerFixture
 {

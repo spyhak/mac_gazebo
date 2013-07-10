@@ -22,9 +22,9 @@ set (qt_headers
   TopicView.hh
 )
 
-set (qt_tests
-  ImagesView_TEST.cc
-)
+#set (qt_tests
+#  ImagesView_TEST.cc
+#)
 
 # Generate executables for each of the QT unit tests
 gz_build_qt_tests(${qt_tests})

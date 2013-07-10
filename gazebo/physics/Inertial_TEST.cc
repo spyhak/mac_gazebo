@@ -15,10 +15,16 @@
  *
 */
 
+#include "gazebo/sensors/Sensor.hh"
+#include "gazebo/sensors/SensorsIface.hh"
 #include <gtest/gtest.h>
-#include "gazebo/physics/physics.hh"
+#include "gazebo/physics/PhysicsIface.hh"
 #include "test/ServerFixture.hh"
 #include "gazebo/physics/Inertial.hh"
+#include "gazebo/sensors/SensorTypes.hh"
+#include "gazebo/sensors/CameraSensor.hh"
+#include "gazebo/rendering/RenderTypes.hh"
+#include "gazebo/rendering/RenderingIface.hh"
 
 #define TOL 1e-6
 using namespace gazebo;

@@ -3,10 +3,12 @@ include ( ${QT_USE_FILE} )
 
 link_directories(
   ${Boost_LIBRARY_DIRS}
+  /opt/X11/lib
 )
 
 include_directories(
   ${CMAKE_SOURCE_DIR}/deps
+  /opt/X11/include
 )
 
 add_definitions(${QT_DEFINITIONS})
@@ -86,11 +88,11 @@ set (headers
 #  )
 #endif()
 
-set (qt_tests
-  DataLogger_TEST.cc
-  MainWindow_TEST.cc
-  TimePanel_TEST.cc
-)
+#set (qt_tests
+#  DataLogger_TEST.cc
+#  MainWindow_TEST.cc
+#  TimePanel_TEST.cc
+#)
 
 # Generate executables for each of the QT unit tests
 gz_build_qt_tests(${qt_tests})

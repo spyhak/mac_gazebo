@@ -26,8 +26,8 @@ set (headers
   RaySensor.hh
   RFIDSensor.hh
   RFIDTag.hh
-  Sensors.hh
   Sensor.hh
+  SensorsIface.hh
   SensorTypes.hh
   SensorFactory.hh
   SensorManager.hh
