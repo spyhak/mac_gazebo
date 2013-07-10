@@ -77,7 +77,6 @@ target_link_libraries(gzserver
 )
 
 target_link_libraries(gazebo
-  gazebo_common
   gazebo_sdf_interface
   gazebo_transport
   gazebo_physics
