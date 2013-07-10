@@ -18,6 +18,9 @@
 #include "gazebo/physics/physics.hh"
 #include "gazebo/transport/transport.hh"
 #include "plugins/DiffDrivePlugin.hh"
+#include "gazebo/common/Plugin.hh"
+#include "gazebo/common/CommonTypes.hh"
+#include "gazebo/sensors/SensorTypes.hh"
 
 using namespace gazebo;
 GZ_REGISTER_MODEL_PLUGIN(DiffDrivePlugin)

@@ -27,6 +27,7 @@
 #include "gazebo/physics/physics.hh"
 #include "gazebo/transport/transport.hh"
 #include "plugins/CartTestPlugin.hh"
+#include "gazebo/common/Plugin.hh"
 #include "gazebo/common/CommonTypes.hh"
 #include "gazebo/sensors/SensorTypes.hh"
 

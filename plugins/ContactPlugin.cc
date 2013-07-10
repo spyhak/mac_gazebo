@@ -17,6 +17,7 @@
  * Author: Nate Koenig mod by John Hsu
  */
 #include "ContactPlugin.hh"
+#include "gazebo/common/Plugin.hh"
 #include "gazebo/common/CommonTypes.hh"
 #include "gazebo/sensors/SensorTypes.hh"
 
