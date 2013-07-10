@@ -19,9 +19,10 @@
  * Date: 10 Nov 2009
  */
 
-#include "gazebo/physics/physics.hh"
+#include "gazebo/physics/Physics.hh"
 #include "gazebo/physics/Collision.hh"
 #include "gazebo/physics/Contact.hh"
+#include "gazebo/physics/PhysicsTypes.hh"
 
 using namespace gazebo;
 using namespace physics;
