@@ -67,7 +67,6 @@ target_link_libraries(gzmaster
 
 target_link_libraries(gzserver
   gazebo_common
-  gazebo_util
   gazebo_sdf_interface
   gazebo_transport
   gazebo_physics
@@ -79,7 +78,6 @@ target_link_libraries(gzserver
 
 target_link_libraries(gazebo
   gazebo_common
-  gazebo_util
   gazebo_sdf_interface
   gazebo_transport
   gazebo_physics
@@ -104,7 +102,6 @@ set_target_properties(libgazebo PROPERTIES OUTPUT_NAME "gazebo")
 
 target_link_libraries(libgazebo
   gazebo_common
-  gazebo_util
   gazebo_transport
   gazebo_physics
   gazebo_sensors
