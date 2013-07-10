@@ -318,6 +318,7 @@ void RenderEngine::Fini()
   delete this->logManager;
   this->logManager = NULL;
 
+#ifndef Q_OS_MAC
   if (this->dummyDisplay)
   {
     glXDestroyContext(static_cast<Display*>(this->dummyDisplay),
@@ -327,7 +328,8 @@ void RenderEngine::Fini()
     XCloseDisplay(static_cast<Display*>(this->dummyDisplay));
     this->dummyDisplay = NULL;
   }
-
+#endif
+    
   this->initialized = false;
 }
 
@@ -353,6 +355,14 @@ void RenderEngine::LoadPlugins()
     std::vector<std::string> plugins;
     std::vector<std::string>::iterator piter;
 
+#ifdef __APPLE__
+      std::string prefix = "lib";
+      std::string extension = ".dylib";
+#else
+      std::string prefix = "";
+      std::string extension = ".so";
+#endif
+      
     plugins.push_back(path+"/RenderSystem_GL");
     plugins.push_back(path+"/Plugin_ParticleFX");
     plugins.push_back(path+"/Plugin_BSPSceneManager");
@@ -604,7 +614,10 @@ void RenderEngine::SetupRenderSystem()
 bool RenderEngine::CreateContext()
 {
   bool result = true;
-
+    
+#ifdef Q_OS_MAC
+    this->dummyDisplay = 0;
+#else
   try
   {
     this->dummyDisplay = XOpenDisplay(0);
@@ -651,6 +664,7 @@ bool RenderEngine::CreateContext()
   {
     result = false;
   }
+#endif
 
   return result;
 }
