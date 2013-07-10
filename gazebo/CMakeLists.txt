@@ -57,7 +57,8 @@ gz_add_executable(gazebo gazebo_main.cc Server.cc Master.cc gazebo.cc)
 
 
 target_link_libraries(gzmaster
-  gazebo_common               
+  gazebo_common
+  gazebo_util            
   gazebo_transport
   gazebo_sdf_interface
   gazebo_msgs
@@ -67,6 +68,7 @@ target_link_libraries(gzmaster
 
 target_link_libraries(gzserver
   gazebo_common
+  gazebo_util
   gazebo_sdf_interface
   gazebo_transport
   gazebo_physics
