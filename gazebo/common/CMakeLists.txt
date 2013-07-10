@@ -41,7 +41,7 @@ set (headers
   Base64.hh
   BVHLoader.hh
   ColladaLoader.hh
-  Common.hh
+  CommonIface.hh
   CommonTypes.hh
   Color.hh
   Console.hh

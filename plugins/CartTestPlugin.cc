@@ -29,6 +29,7 @@
 #include "plugins/CartTestPlugin.hh"
 #include "gazebo/common/Plugin.hh"
 #include "gazebo/common/CommonTypes.hh"
+#include "gazebo/common/CommonIface.hh"
 #include "gazebo/sensors/SensorTypes.hh"
 
 using namespace gazebo;
