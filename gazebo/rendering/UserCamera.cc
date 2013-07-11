@@ -247,13 +247,13 @@ bool UserCamera::AttachToVisualImpl(VisualPtr _visual, bool _inheritOrientation,
     yaw = _visual->GetWorldPose().rot.GetAsEuler().z;
 
     double zDiff = origPose.pos.z - _visual->GetWorldPose().pos.z;
-    Ogre::Radian pitch = Ogre::Radian(0.0f);
+    double pitch = 0;
 
     if (fabs(zDiff) > 1e-3)
     {
       double dist = _visual->GetWorldPose().pos.Distance(
           this->GetWorldPose().pos);
-        pitch = Ogre::Math::ACos(zDiff/dist);
+      pitch = acos(zDiff/dist);
     }
 
     this->RotateYaw(yaw);
