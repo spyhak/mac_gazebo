@@ -29,17 +29,17 @@
 #include <vector>
 #include <deque>
 
-#include "gazebo/common/Event.hh"
-#include "gazebo/common/Time.hh"
+#include "common/Event.hh"
+#include "common/Time.hh"
 
-#include "gazebo/math/Angle.hh"
-#include "gazebo/math/Pose.hh"
-#include "gazebo/math/Plane.hh"
-#include "gazebo/math/Vector2i.hh"
+#include "math/Angle.hh"
+#include "math/Pose.hh"
+#include "math/Plane.hh"
+#include "math/Vector2i.hh"
 
-#include "gazebo/msgs/MessageTypes.hh"
-#include "gazebo/rendering/RenderTypes.hh"
-#include "gazebo/sdf/sdf.hh"
+#include "msgs/MessageTypes.hh"
+#include "rendering/RenderTypes.hh"
+#include "sdf/sdf.hh"
 
 // Forward Declarations
 namespace Ogre
@@ -484,9 +484,6 @@ namespace gazebo
 
       /// \brief Implementation of the render call
       protected: virtual void RenderImpl();
-
-      /// \brief Read image data from pixel buffer
-      protected: void ReadPixelBuffer();
 
       /// \brief Implementation of the Camera::TrackVisual call
       /// \param[in] _visualName Name of the visual to track
