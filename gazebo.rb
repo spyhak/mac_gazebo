@@ -6,6 +6,7 @@ class Gazebo < Formula
     version '1.8.6'
     
     depends_on 'boost'
+    depends_on 'ffmpeg'
     depends_on 'cmake'  => :build
     depends_on 'doxygen'
     depends_on 'freeimage'
