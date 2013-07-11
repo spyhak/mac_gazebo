@@ -253,7 +253,7 @@ bool UserCamera::AttachToVisualImpl(VisualPtr _visual, bool _inheritOrientation,
     {
       double dist = _visual->GetWorldPose().pos.Distance(
           this->GetWorldPose().pos);
-      pitch = acos(zDiff/dist);
+        pitch = Ogre::Math::ACos(zDiff/dist);
     }
 
     this->RotateYaw(yaw);
