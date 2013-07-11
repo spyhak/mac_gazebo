@@ -2687,11 +2687,11 @@ void Scene::SetSkyXMode(unsigned int _mode)
     return;
 
   bool enabled = _mode != GZ_SKYX_NONE;
-  this->skyx->setEnabled(enabled);
+  //this->skyx->setEnabled(enabled);
 
   if (!enabled)
     return;
 
-  this->skyx->setCloudsEnabled(_mode & GZ_SKYX_CLOUDS);
-  this->skyx->setMoonEnabled(_mode & GZ_SKYX_MOON);
+  //this->skyx->setCloudsEnabled(_mode & GZ_SKYX_CLOUDS);
+  //this->skyx->setMoonEnabled(_mode & GZ_SKYX_MOON);
 }
