@@ -247,7 +247,7 @@ bool UserCamera::AttachToVisualImpl(VisualPtr _visual, bool _inheritOrientation,
     yaw = _visual->GetWorldPose().rot.GetAsEuler().z;
 
     double zDiff = origPose.pos.z - _visual->GetWorldPose().pos.z;
-    Ogre::Radian pitch = 0;
+    Ogre::Radian pitch = Ogre::Radian(0.0f);
 
     if (fabs(zDiff) > 1e-3)
     {
