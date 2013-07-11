@@ -445,40 +445,32 @@ namespace SkyX { namespace VClouds
       const Ogre::Vector3& d, const float& att) const
   {
     Ogre::Real step = 1, factor = 1;
-    Ogre::Vector3 negD = -d;
-    int xLocal = x;
-    int yLocal = y;
-    int zLocal = z;
+    Ogre::Vector3 pos = Ogre::Vector3(x, y, z);
     bool outOfBounds = false;
     int u, v, uu, vv,
         current_iteration = 0, max_iterations = 8;
 
     while (!outOfBounds)
     {
-      if (zLocal >= nz || zLocal < 0 || factor <= 0 ||
+      if (static_cast<int>(pos.z) >= nz ||
+          static_cast<int>(pos.z) < 0 || factor <= 0 ||
           current_iteration >= max_iterations)
       {
         outOfBounds = true;
       }
       else
       {
-        u = xLocal;
-        v = yLocal;
+        u = static_cast<int>(pos.x);
+        v = static_cast<int>(pos.y);
 
         uu = (u < 0) ? (u + nx) : u;
-        if (u >= nx)
-          uu -= nx;
-
+        if (u >= nx) { uu -= nx; }
         vv = (v < 0) ? (v + ny) : v;
-        if (v >= ny)
-          vv -= ny;
+        if (v >= ny) { vv -= ny; }
 
-        factor -= c[uu][vv][zLocal].dens * att * (1 -
+        factor -= c[uu][vv][static_cast<int>(pos.z)].dens*att*(1 -
             static_cast<float>(current_iteration)/max_iterations);
-
-        xLocal += step * negD.x;
-        yLocal += step * negD.y;
-        zLocal += step * negD.z;
+        pos += step*(-d);
 
         current_iteration++;
       }

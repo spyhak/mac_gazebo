@@ -32,8 +32,6 @@ namespace SkyX
   SkyX::SkyX(Ogre::SceneManager* sm, Controller* c)
     : Ogre::FrameListener()
       , Ogre::RenderTargetListener()
-      , mStarfield(true)
-      , mLightingMode(LM_LDR)
       , mSceneManager(sm)
       , mController(c)
       , mCamera(0)
@@ -50,11 +48,10 @@ namespace SkyX
       , mLastCameraFarClipDistance(-1)
       , mInfiniteCameraFarClipDistance(100000)
       , mVisible(true)
+      , mLightingMode(LM_LDR)
+      , mStarfield(true)
       , mTimeMultiplier(0.1f)
       , mTimeOffset(0.0f)
-      , mMoonEnabled(true)
-      , mCloudsEnabled(true)
-      , mEnabled(true)
   {
     // Need to be instanced here, when SkyX::mSceneManager is valid
     mVCloudsManager = new VCloudsManager(this);
@@ -116,10 +113,6 @@ namespace SkyX
     mLastCameraPosition = Ogre::Vector3(0, 0, 0);
     mLastCameraFarClipDistance = -1;
 
-    // FIXME: Disable mMoonManager otherwise gpu range values get clipped.
-    // issue #678
-    mMoonManager->getMoonSceneNode()->setVisible(false);
-
     mCreated = true;
   }
 
@@ -142,7 +135,7 @@ namespace SkyX
 
   void SkyX::update(const Ogre::Real& timeSinceLastFrame)
   {
-    if (!mCreated || !this->mEnabled)
+    if (!mCreated)
     {
       return;
     }
@@ -174,18 +167,14 @@ namespace SkyX
     mGPUManager->setGpuProgramParameter(
         GPUManager::GPUP_FRAGMENT, "uLightDir", sunDir);
 
-    if (this->mMoonEnabled)
-      mMoonManager->updateMoonPhase(mController->getMoonPhase());
-    if (this->mCloudsEnabled)
-    {
-      mCloudsManager->update();
-      mVCloudsManager->update(timeSinceLastFrame);
-    }
+    mMoonManager->updateMoonPhase(mController->getMoonPhase());
+    mCloudsManager->update();
+    mVCloudsManager->update(timeSinceLastFrame);
   }
 
   void SkyX::notifyCameraRender(Ogre::Camera* c)
   {
-    if (!mCreated || !this->mEnabled)
+    if (!mCreated)
     {
       return;
     }
@@ -206,12 +195,9 @@ namespace SkyX
       mLastCameraFarClipDistance = mCamera->getFarClipDistance();
     }
 
-    if (this->mMoonEnabled)
-      mMoonManager->updateGeometry(c);
-    if (this->mCloudsEnabled)
-    {
-      mVCloudsManager->notifyCameraRender(c);
-    }
+    mMoonManager->updateGeometry(c);
+
+    mVCloudsManager->notifyCameraRender(c);
   }
 
   void SkyX::setVisible(const bool& visible)
@@ -224,9 +210,7 @@ namespace SkyX
     }
 
     mMeshManager->getSceneNode()->setVisible(mVisible);
-
-    // Disable moon manager as it clips gpu laser range values
-    // mMoonManager->getMoonSceneNode()->setVisible(mVisible);
+    mMoonManager->getMoonSceneNode()->setVisible(mVisible);
 
     if (mVCloudsManager->isCreated())
     {
